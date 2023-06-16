@@ -6,7 +6,7 @@
 
 ### Resumo da aplicação:
 
->O sistema coleta os dados numa planilha do Google Sheets, armazena-os num dicionário Python e preenche os campos obrigatórios, com base nos dados do dicionário, da página de emissão de NF de serviço da prefeitura de BH.
+>O sistema coleta os dados numa planilha do Google Sheets, por meio da api disponibilizada pelo Google, armazena-os num dicionário Python e preenche os campos obrigatórios, com base nos dados do dicionário, da página de emissão de NF de serviço da prefeitura de BH.
 
 ### Google Sheets:
 
@@ -37,21 +37,25 @@ O projeto possui a seguinte estrutura:
 ├── chromedriver
 │   └── chromedriver.exe
 ├── credenciais.py
+├── .env
 ├── google_sheets
 │   ├── __init__.py
 │   ├── service_account.json
 │   └── sheets.py
 ├── nf
-│   └── emissor_nf.py
+│   ├── emissor_nf.py
+│   └── nfs_emitidas.txt
 ├── README.md
 └── requirements.txt
 
 ```
 
 - O módulo credenciais.py é onde se dá a parametrização, por meio da biblioteca python-decouple, que de modo resumido gerencia variáveis de ambiente de forma a não permitir que dados sensíveis, como neste caso: login; XPATH dos elementos da página da prefeitura de BH; ID da planilha etc fiquem expostos.
-Tais dados devem ser expressados num arquivo .env, que neste repositório está nomeado como .env-example.
+Tais dados devem ser expressados num arquivo .env, que neste repositório está nomeado como .env-example, visto que o arquivo .env original não pode em nenhuma hipótese ser público, pelas razões já informadas.
 
-- No pacote google_sheets, o módulo sheets.py possui funções que são responsáveis por:
+- O arquivo .env-example, como já mencionado, é onde estão relacionadas todas as variáveis de ambiente, fundamentais para o funcionamento do sistema.
+
+- No pacote google_sheets, o módulo sheets.py é onde se faz a comunicação com o planilha. Esta comunicação é realizada por meio da biblioteca [Gspread](https://docs.gspread.org/en/v5.7.2/). As funções deste módulo são responsáveis por:
 
   - Coleta de dados na planilha;
   - Armazenagem dos dados das NFs emitidas;
@@ -73,7 +77,7 @@ Optou-se por armazenar os dados de emissão e atualização da planilha num arqu
 ### O Problema
 
 >>Antes, todo o processo era realizado de forma manual, no qual incorria em vários erros, dado a rotina enfadonha de copia e cola, o que ocasionava em preenchimentos incorretos e, consequentemente, cancelamentos de documentos fiscais.
-Ademais, a pessoa que realizava a operação era uma idosa que não possuía uma base consistente de questões relacionadas à tecnologia. 
+Ademais, a pessoa que realizava a operação era uma idosa que não possuía uma base consistente no que tange à tecnologia. 
 Cada NF gerada podia levar 10 minutos, sem contar, evidentemente, o retrabalho quando de emissão incorreta.
 Com a automatização, o tempo de emissão de cada NF caiu para em média 30 segundos!, além de proporcionar segurança dos dados por meio de critérios bem delineados.
 
