@@ -73,5 +73,5 @@ Optou-se por armazenar os dados de emissão e atualização da planilha num arqu
 >>Antes, todo o processo era realizado de forma manual, no qual incorria em vários erros, dado a rotina enfadonha de copia e cola, o que ocasionava em preenchimentos incorretos e, consequentemente, cancelamentos de documentos fiscais.
 Ademais, a pessoa que realizava a operação era uma idosa que não possuía uma base consistente de questões relacionadas à tecnologia. 
 Cada NF gerada podia levar 10 minutos, sem contar, evidentemente, o retrabalho quando de emissão incorreta.
-Com a automatização, o tempo de emissão de cada NF é em média 30 segundos!
+Com a automatização, o tempo de emissão de cada NF caiu para em média 30 segundos!, além de proporcionar segurança dos dados por meio de critérios bem delineados.
 
