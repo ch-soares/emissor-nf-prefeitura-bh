@@ -26,7 +26,9 @@ No meu caso existem vários outros campos, uma vez que são usados para outras f
 
 Para indicar para o script quais dados deverão ser coletados, optei em colocar a palavra "Liberado" na linha correspondente aos dados que pretendo que sejam coletados e que serão utilizados para a emissao da NF.
 
->>Estes dados são devidamente tratados por meio critérios, utilizando-se de fórmulas do google sheets, de modo a não permitir que dados inconsistentes sejam coletados.
+![Captura de tela de 2023-06-15 21-44-08](https://github.com/ch-soares/emissor-nf-prefeitura-bh/assets/65301099/8e028a10-7df8-4dac-8675-39a536026319)
+
+>>Os dados são devidamente tratados por meio critérios, utilizando-se de fórmulas do google sheets, de modo a não permitir que informações inconsistentes sejam coletadas.
 
 O projeto possui a seguinte estrutura:
 
