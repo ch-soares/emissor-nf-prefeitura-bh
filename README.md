@@ -37,7 +37,8 @@ O projeto possui a seguinte estrutura:
 ├── chromedriver
 │   └── chromedriver.exe
 ├── credenciais.py
-├── .env
+├── .env-example
+├── .gitignore
 ├── google_sheets
 │   ├── __init__.py
 │   ├── service_account.json
@@ -65,6 +66,8 @@ Tais dados devem ser expressados num arquivo .env, que neste repositório está 
 O script é capaz de gerar vários documentos com apenas um comando, por meio de um loop.
 
 - O arquivo requirements.tx é onde estão relacionadas todas as dependências do projeto.
+  
+- Já o arquivo .gitignore é onde estão descritos todos os diretórios e arquivos que não precisam e/ou não podem ir para o repositório remoto, como: .env, .venv, service_account.json etc.
 
 Nota-se que neste repositório não se encontram o diretório chromedriver nem o arquivo executável de mesmo nome, uma vez que tal arquivo muda de acordo com a versão do browser do Google.
 Devendo, portanto, ser baixado de acordo com cada contexto.
