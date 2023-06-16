@@ -1,6 +1,8 @@
-# Sistema de emissão de notas fiscais de serviço da Prefeitura de BH
+# Sistema de automatização de emissão de notas fiscais de serviço da Prefeitura de BH
 
 ## Desenvolvido em Python e com o auxílio das bibliotecas: Selenium e PyAutoGui
+
+## Base de dados: Google Sheets
 
 ### Resumo da aplicação:
 
@@ -8,7 +10,7 @@
 
 ### Google Sheets:
 
-Será necessário ler a [documentação](https://developers.google.com/sheets/api/guides/concepts?hl=pt-br) e seguir os passos para acessar a api do Google.
+Será necessário ler a [documentação](https://developers.google.com/sheets/api/guides/concepts?hl=pt-br) e seguir os passos para acessar a api do Google Sheets e Google Drive.
 
 Supondo que tenha conta no gmail e criado a planilha, o próximo passo é nomear as abas e popular a planilha com os dados exigidos para emissão de NF, isto é:
 - Data Emissão
@@ -23,13 +25,26 @@ Supondo que tenha conta no gmail e criado a planilha, o próximo passo é nomear
 No meu caso existem vários outros campos, uma vez que são usados para outras finalidades que não emissão de NF. Desta forma, se desejar, você poderá fazê-lo também, pois o script só irá considerar os dados citados acima.
 
 Para indicar para o script quais dados deverão ser coletados, optei em colocar a palavra "Liberado" na linha correspondente aos dados que pretendo que sejam coletados e que serão utilizados para a emissao da NF.
-Estes dados são devidamente tratados por meio critérios, utilizando-se de fórmulas do google sheets, de modo a não permitir que dados inconsistentes sejam coletados.
 
-![Captura de tela de 2023-06-15 21-44-08.png](..%2F..%2FImagens%2FCaptura%20de%20tela%20de%202023-06-15%2021-44-08.png)
+>>Estes dados são devidamente tratados por meio critérios, utilizando-se de fórmulas do google sheets, de modo a não permitir que dados inconsistentes sejam coletados.
 
-A projeto possui a seguinte estrutura:
+O projeto possui a seguinte estrutura:
 
-![Captura de tela de 2023-06-15 22-13-01.png](..%2F..%2FImagens%2FCaptura%20de%20tela%20de%202023-06-15%2022-13-01.png)
+```
+.
+├── chromedriver
+│   └── chromedriver.exe
+├── credenciais.py
+├── google_sheets
+│   ├── __init__.py
+│   ├── service_account.json
+│   └── sheets.py
+├── nf
+│   └── emissor_nf.py
+├── README.md
+└── requirements.txt
+
+```
 
 - O módulo credenciais.py é onde se dá a parametrização, por meio da biblioteca python-decouple, que de modo resumido gerencia variáveis de ambiente de forma a não permitir que dados sensíveis, como neste caso: login; XPATH dos elementos da página da prefeitura de BH; ID da planilha etc fiquem expostos.
 Tais dados devem ser expressados num arquivo .env, que neste repositório está nomeado como .env-example.
@@ -42,6 +57,8 @@ Tais dados devem ser expressados num arquivo .env, que neste repositório está 
 
 - O múdulo emissor_nf.py, dentro do pacote nf, é onde está toda a lógica por trás da emissão das NFs. Ele acessa os dados gerados do módulo sheets.py e por meio do Selenium e PyAutoGui os dados são preenchidos na plataforma da prefeitura de BH.
 O script é capaz de gerar vários documentos com apenas um comando, por meio de um loop.
+
+- O arquivo requirements.tx é onde estão relacionadas todas as dependências do projeto.
 
 Nota-se que neste repositório não se encontram o diretório chromedriver nem o arquivo executável de mesmo nome, uma vez que tal arquivo muda de acordo com a versão do browser do Google.
 Devendo, portanto, ser baixado de acordo com cada contexto.
