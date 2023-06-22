@@ -58,30 +58,27 @@ O projeto possui a seguinte estrutura:
 
 ```
 
-![Captura de tela de 2023-06-16 10-16-40.png](..%2F..%2FImagens%2FCaptura%20de%20tela%20de%202023-06-16%2010-16-40.png)
-
 - O módulo credenciais.py é onde se dá a parametrização, por meio da biblioteca python-decouple, que de modo resumido gerencia variáveis de ambiente de forma a não permitir que dados sensíveis, como neste caso: login; XPATH dos elementos da página da prefeitura de BH; ID da planilha etc fiquem expostos.
 Tais dados devem ser expressados num arquivo .env, que neste repositório está nomeado como .env-example, visto que o arquivo .env original não pode em nenhuma hipótese ser público, pelas razões já informadas.
 
-- O arquivo .env, como já mencionado, é onde estão relacionadas todas as variáveis de ambiente, fundamentais para o funcionamento do sistema. Neste repositório, no entanto, este arquivo está nomeado como env-example, no qual estão descritas apenas os nomes das variáveis, sem os valores, a título de exemplo. 
+- O arquivo .env, como já mencionado, é onde estão relacionadas todas as variáveis de ambiente, fundamentais para o funcionamento do sistema. Neste repositório, no entanto, este arquivo está nomeado como .env-example, no qual estão descritas apenas os nomes das variáveis, sem os valores, a título de exemplo.
+
+- Já o arquivo .gitignore é onde estão descritos todos os diretórios e arquivos que não precisam e/ou não podem ir para o repositório remoto, como: .env, .venv, service_account.json etc.
 
 - No pacote google_sheets, o módulo sheets.py é onde se faz a comunicação com o planilha. Esta comunicação é realizada por meio da biblioteca [Gspread](https://docs.gspread.org/en/v5.7.2/). As funções deste módulo são responsáveis por:
 
   - Coleta de dados na planilha;
   - Armazenagem dos dados das NFs emitidas;
-  - E atualização da planilha com as Nfs emitidas
+  - E atualização da planilha com as Nfs emitidas.
 
 - O múdulo emissor_nf.py, dentro do pacote nf, é onde está toda a lógica por trás da emissão das NFs. Ele acessa os dados gerados do módulo sheets.py e por meio do Selenium e PyAutoGui os dados são preenchidos na plataforma da prefeitura de BH.
 O script é capaz de gerar vários documentos com apenas um comando, por meio de um loop.
 
 - O arquivo requirements.tx é onde estão relacionadas todas as dependências do projeto.
-  
-- Já o arquivo .gitignore é onde estão descritos todos os diretórios e arquivos que não precisam e/ou não podem ir para o repositório remoto, como: .env, .venv, service_account.json etc.
 
-Nota-se que neste repositório não se encontram o diretório chromedriver nem o arquivo executável de mesmo nome, uma vez que tal arquivo muda de acordo com a versão do browser do Google.
-Devendo, portanto, ser baixado de acordo com cada contexto.
+Nota-se que neste repositório não se encontram o diretório chromedriver nem o arquivo executável de mesmo nome, uma vez que tal arquivo muda de acordo com a versão do Google Chrome, devendo ser baixado de acordo com cada contexto.
  
-O arquivo service.account.json também não se encontra neste repositório em razão deste arquivo conter dados sensíveis da planilha, como token e ID, por exemplo; portanto não podem ser públicos.
+O arquivo service.account.json também não se encontra neste repositório em razão deste arquivo conter dados sensíveis da planilha, como token e ID, por exemplo; assim não podem ser públicos.
 Este arquivo deverá ser devidamente baixado após ler a [documentação](https://developers.google.com/sheets/api/guides/concepts?hl=pt-br) para acessar a api do Google Sheets e executar os comandos impostos pela plataforma.
 
 O arquivo nfs_emitidas.txt não está neste repositório em função de conter os dados do cliente cuja nf foi emitida. De igual sorte, portanto, não pode ser público. Optou-se por armazenar os dados de emissão e atualização da planilha num arquivo txt de modo a diminuir os acessos à api e evitar erros eventuais na navegação web, e que poderiam interromper a execução do script.
