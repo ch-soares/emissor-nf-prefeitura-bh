@@ -49,7 +49,6 @@ class EmissorNf:
 
     def gerar_nf(self):
         self.login()
-        self.erros = []
         self.nfs_emitidas = []
         for dado in self.dados:
             try:
@@ -123,11 +122,10 @@ class EmissorNf:
                 self.carregar_certificado_digital()
 
             except Exception:
-                if len(self.nfs_emitidas) == 0:
-                    print('Erro na coleta de dados da planilha. Tente reiniciar o processo.')
-                else:
-                    salvar_nfs_emitidas(self.nfs_emitidas)
-                    atualizar_planilha()
+                nf_nao_emitida = ' '.join([dado['DATA'], dado['CPF'], dado['CLIENTE']])
+                print(f'NF não emitida: {nf_nao_emitida}')
+                salvar_nfs_emitidas(self.nfs_emitidas)
+                atualizar_planilha()
 
         salvar_nfs_emitidas(self.nfs_emitidas)
         atualizar_planilha()

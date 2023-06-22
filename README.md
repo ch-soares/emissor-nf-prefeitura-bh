@@ -1,5 +1,12 @@
 # Sistema de automatização de emissão de notas fiscais de serviço da Prefeitura de BH
 
+# O Problema
+
+>>Antes, todo o processo era realizado de forma manual, no qual incorria em vários erros, dado a rotina enfadonha de copia e cola, o que ocasionava em preenchimentos incorretos e, consequentemente, cancelamentos de documentos fiscais.
+Ademais, a pessoa que realizava a operação era uma idosa que não possuía uma base consistente no que tange à tecnologia. 
+Cada NF gerada podia levar 10 minutos, sem contar, evidentemente, o retrabalho quando de emissão incorreta.
+Com a automatização, o tempo de emissão de cada NF caiu para em média 30 segundos!, além de proporcionar segurança dos dados por meio de critérios bem delineados.
+
 ## Desenvolvido em Python e com o auxílio das bibliotecas: Selenium e PyAutoGui
 
 ## Base de dados: Google Sheets
@@ -22,7 +29,7 @@ Supondo que tenha conta no gmail e criado a planilha, o próximo passo é nomear
 - Município
 - Valor
 
-No meu caso existem vários outros campos, uma vez que são usados para outras finalidades que não emissão de NF. Desta forma, se desejar, você poderá fazê-lo também, pois o script só irá considerar os dados citados acima.
+No meu caso existem vários outros campos, uma vez que são usados para outras finalidades que não emissão de NF. Todavia, o script só irá considerar os dados citados acima.
 
 Para indicar para o script quais dados deverão ser coletados, optei em colocar a palavra "Liberado" na linha correspondente aos dados que pretendo que sejam coletados e que serão utilizados para a emissao da NF.
 
@@ -37,7 +44,7 @@ O projeto possui a seguinte estrutura:
 ├── chromedriver
 │   └── chromedriver.exe
 ├── credenciais.py
-├── .env-example
+├── .env
 ├── .gitignore
 ├── google_sheets
 │   ├── __init__.py
@@ -51,10 +58,12 @@ O projeto possui a seguinte estrutura:
 
 ```
 
+![Captura de tela de 2023-06-16 10-16-40.png](..%2F..%2FImagens%2FCaptura%20de%20tela%20de%202023-06-16%2010-16-40.png)
+
 - O módulo credenciais.py é onde se dá a parametrização, por meio da biblioteca python-decouple, que de modo resumido gerencia variáveis de ambiente de forma a não permitir que dados sensíveis, como neste caso: login; XPATH dos elementos da página da prefeitura de BH; ID da planilha etc fiquem expostos.
 Tais dados devem ser expressados num arquivo .env, que neste repositório está nomeado como .env-example, visto que o arquivo .env original não pode em nenhuma hipótese ser público, pelas razões já informadas.
 
-- O arquivo .env-example, como já mencionado, é onde estão relacionadas todas as variáveis de ambiente, fundamentais para o funcionamento do sistema.
+- O arquivo .env, como já mencionado, é onde estão relacionadas todas as variáveis de ambiente, fundamentais para o funcionamento do sistema. Neste repositório, no entanto, este arquivo está nomeado como env-example, no qual estão descritas apenas os nomes das variáveis, sem os valores, a título de exemplo. 
 
 - No pacote google_sheets, o módulo sheets.py é onde se faz a comunicação com o planilha. Esta comunicação é realizada por meio da biblioteca [Gspread](https://docs.gspread.org/en/v5.7.2/). As funções deste módulo são responsáveis por:
 
@@ -75,12 +84,4 @@ Devendo, portanto, ser baixado de acordo com cada contexto.
 O arquivo service.account.json também não se encontra neste repositório em razão deste arquivo conter dados sensíveis da planilha, como token e ID, por exemplo; portanto não podem ser públicos.
 Este arquivo deverá ser devidamente baixado após ler a [documentação](https://developers.google.com/sheets/api/guides/concepts?hl=pt-br) para acessar a api do Google Sheets e executar os comandos impostos pela plataforma.
 
-Optou-se por armazenar os dados de emissão e atualização da planilha num arquivo txt de modo a diminuir os acessos à api e evitar erros eventuais na navegação web, que poderiam interromper a execução do script.
-
-### O Problema
-
->>Antes, todo o processo era realizado de forma manual, no qual incorria em vários erros, dado a rotina enfadonha de copia e cola, o que ocasionava em preenchimentos incorretos e, consequentemente, cancelamentos de documentos fiscais.
-Ademais, a pessoa que realizava a operação era uma idosa que não possuía uma base consistente no que tange à tecnologia. 
-Cada NF gerada podia levar 10 minutos, sem contar, evidentemente, o retrabalho quando de emissão incorreta.
-Com a automatização, o tempo de emissão de cada NF caiu para em média 30 segundos!, além de proporcionar segurança dos dados por meio de critérios bem delineados.
-
+O arquivo nfs_emitidas.txt não está neste repositório em função de conter os dados do cliente cuja nf foi emitida. De igual sorte, portanto, não pode ser público. Optou-se por armazenar os dados de emissão e atualização da planilha num arquivo txt de modo a diminuir os acessos à api e evitar erros eventuais na navegação web, e que poderiam interromper a execução do script.
